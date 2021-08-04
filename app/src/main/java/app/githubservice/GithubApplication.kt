@@ -13,11 +13,7 @@ class GithubApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@GithubApplication)
-            modules(
-                listOf(
-                    networkModule
-                )
-            )
+            modules(networkModule)
         }
 
     }

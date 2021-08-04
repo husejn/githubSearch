@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import app.githubservice.databinding.SearchFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SearchFragment : Fragment() {
-    private val viewModel by viewModels<SearchViewModel>()
+    private val viewModel: SearchViewModel by sharedViewModel()
     private var binding: SearchFragmentBinding? = null
 
     override fun onCreateView(
