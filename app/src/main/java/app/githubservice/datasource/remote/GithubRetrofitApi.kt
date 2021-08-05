@@ -11,6 +11,6 @@ interface GithubRetrofitApi {
         @Query("q") query: String,
         @Query("page") page: Int,
         @Query("per_page") pageSize: Int
-    ): Response<GithubRepositoryResponseModel>
+    ): GithubRepositoryResponseModel
 
 }
