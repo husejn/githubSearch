@@ -8,9 +8,13 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import app.githubservice.databinding.SearchFragmentBinding
 import app.githubservice.model.GithubRepositoryModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
@@ -72,12 +76,23 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                searchDebounced(newText)
                 return false
             }
         })
 
         binding.searchView.setQuery(INITIAL_SEARCH_TERM, true)
 
+    }
+
+    private var searchJob: Job? = null
+
+    fun searchDebounced(searchText: String) {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            delay(2500)
+            viewModel.searchGithub(searchText)
+        }
     }
 
     override fun onDestroyView() {
