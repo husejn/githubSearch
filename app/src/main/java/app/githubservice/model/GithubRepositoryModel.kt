@@ -6,7 +6,7 @@ import java.util.*
 
 
 @Keep
-data class GithubRepository(
+data class GithubRepositoryModel(
     val id: Int,
     val name: String,
     @SerializedName("full_name")
