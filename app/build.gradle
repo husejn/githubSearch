@@ -27,6 +27,20 @@ android {
         experimental = true
     }
 
+    flavorDimensions "version"
+    productFlavors {
+        demo {
+            dimension "version"
+            buildConfigField 'boolean', 'IS_PAID', 'false'
+            applicationIdSuffix ".free"
+        }
+        full {
+            dimension "version"
+            buildConfigField 'boolean', 'IS_PAID', 'true'
+            applicationIdSuffix ".paid"
+        }
+    }
+
     buildTypes {
         release {
             buildConfigField "String", "API_URL", "\"https://api.github.com/\""

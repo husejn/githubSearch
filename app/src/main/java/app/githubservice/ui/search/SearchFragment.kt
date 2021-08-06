@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import app.githubservice.BuildConfig
 import app.githubservice.databinding.SearchFragmentBinding
 import app.githubservice.model.GithubRepositoryModel
 import app.githubservice.ui.util.navigateSafe
@@ -120,18 +121,23 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(githubRepo: GithubRepositoryModel) {
+        if (!BuildConfig.IS_PAID) {
+            Toast.makeText(requireContext(), "paid version required", Toast.LENGTH_LONG).show()
+            return
+        }
         findNavController().navigateSafe(
             this,
             SearchFragmentDirections.actionSearchFragmentDetailsFragment(
                 githubRepo
             )
         )
-
-
     }
 
     override fun onImageClick(githubRepo: GithubRepositoryModel) {
-       openUrlLink(requireContext(), githubRepo.owner.htmlUrl)
+        if (!BuildConfig.IS_PAID) {
+            Toast.makeText(requireContext(), "paid version required", Toast.LENGTH_LONG).show()
+            return
+        }
+        openUrlLink(requireContext(), githubRepo.owner.htmlUrl)
     }
-
 }
