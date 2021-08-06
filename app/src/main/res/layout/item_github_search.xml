@@ -1,26 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:padding="8dp">
+
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:contentDescription="@string/avatar" />
 
-        <TextView
-            android:id="@+id/text_view_user_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:maxLines="1"
-            tools:text="username" />
+            android:layout_toEndOf="@id/image_view"
+            android:orientation="vertical">
 
-    </LinearLayout>
 
+            <TextView
+                android:id="@+id/text_view_repository_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:maxLines="1"
+                tools:text="koin by InsertKoinIo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_view_repository_watchers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:drawablePadding="6dp"
+                    android:padding="4dp"
+                    app:drawableStartCompat="@drawable/ic_baseline_visibility_20"
+                    tools:text="51" />
+
+                <TextView
+                    android:id="@+id/text_view_repository_forks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:drawablePadding="6dp"
+                    android:padding="4dp"
+                    app:drawableStartCompat="@drawable/ic_baseline_content_copy_20"
+                    tools:text="20" />
+
+                <TextView
+                    android:id="@+id/text_view_repository_open_issues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:drawablePadding="6dp"
+                    android:padding="4dp"
+                    app:drawableStartCompat="@drawable/ic_baseline_error_outline_20"
+                    tools:text="3" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
 </layout>

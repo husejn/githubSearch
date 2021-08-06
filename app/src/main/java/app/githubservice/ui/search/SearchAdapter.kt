@@ -1,5 +1,6 @@
 package app.githubservice.ui.search
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -44,14 +45,20 @@ class SearchAdapter(private val listener: OnItemClickListener) :
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(githubRepoModel: GithubRepositoryModel) {
             binding.apply {
-                Glide.with(itemView)
-                    .load(githubRepoModel.owner.avatarUrl)
-                    .error(R.drawable.ic_error)
-                    .into(imageView)
+                githubRepoModel.apply {
+                    Glide.with(itemView)
+                        .load(githubRepoModel.owner.avatarUrl)
+                        .error(R.drawable.ic_error)
+                        .into(imageView)
+                    textViewRepositoryFullName.text = "$name by ${owner.login}"
+                    textViewRepositoryForks.text = forksCount.toString()
+                    textViewRepositoryOpenIssues.text = openIssuesCount.toString()
+                    textViewRepositoryWatchers.text = watchersCount.toString()
+                }
 
-                textViewUserName.text = githubRepoModel.fullName
             }
         }
     }
