@@ -12,7 +12,7 @@
         tools:layout="@layout/search_fragment">
 
         <action
-            android:id="@+id/action_search_fragment_details_fragmnet"
+            android:id="@+id/action_search_fragment_details_fragment"
             app:destination="@id/detailsFragment" />
 
 
@@ -22,6 +22,12 @@
         android:id="@+id/detailsFragment"
         android:name="app.githubservice.ui.details.DetailsFragment"
         android:label="details_fragment"
-        tools:layout="@layout/details_fragment" />
+        tools:layout="@layout/details_fragment">
+
+        <argument
+            android:name="githubRepositoryModel"
+            app:argType="app.githubservice.model.GithubRepositoryModel" />
+
+    </fragment>
 
 </navigation>

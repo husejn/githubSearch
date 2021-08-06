@@ -1,10 +1,12 @@
 package app.githubservice.model
 
+import android.os.Parcelable
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-
+@Parcelize
 @Keep
 data class GithubRepositoryModel(
     val id: Int,
@@ -26,8 +28,9 @@ data class GithubRepositoryModel(
     @SerializedName("updated_at")
     val updatedAt: Date,
     val owner: GithubOwner,
-)
+): Parcelable
 
+@Parcelize
 @Keep
 data class GithubOwner(
     val login: String,
@@ -35,4 +38,4 @@ data class GithubOwner(
     val htmlUrl: String,
     @SerializedName("avatar_url")
     val avatarUrl: String,
-)
+): Parcelable
