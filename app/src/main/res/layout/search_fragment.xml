@@ -8,6 +8,8 @@
 
         <import type="android.view.View" />
 
+        <import type="app.githubservice.ui.search.GithubSearch" />
+
         <variable
             name="viewModel"
             type="app.githubservice.ui.search.SearchViewModel" />
@@ -18,6 +20,49 @@
         android:layout_height="match_parent"
         tools:context=".ui.search.SearchFragment">
 
+
+        <RadioGroup
+            android:id="@+id/sort_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radio_bestmatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.currentSort.equals(GithubSearch.BEST_MATCH)}"
+                android:onClick='@{()->viewModel.sortBy(GithubSearch.BEST_MATCH)}'
+                android:text="@string/bestmatch" />
+
+            <RadioButton
+                android:id="@+id/radio_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.currentSort.equals(GithubSearch.STARS)}"
+                android:onClick='@{()->viewModel.sortBy(GithubSearch.STARS)}'
+                android:text="@string/stars" />
+
+            <RadioButton
+                android:id="@+id/radio_forks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.currentSort.equals(GithubSearch.FORKS)}"
+                android:onClick='@{()->viewModel.sortBy(GithubSearch.FORKS)}'
+                android:text="@string/forks" />
+
+            <RadioButton
+                android:id="@+id/radio_updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.currentSort.equals(GithubSearch.UPDATED)}"
+                android:onClick='@{()->viewModel.sortBy(GithubSearch.UPDATED)}'
+                android:text="@string/updated" />
+        </RadioGroup>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -27,7 +72,7 @@
             app:layout_constraintBottom_toTopOf="@id/search_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sort_linear_layout"
             tools:listitem="@layout/item_github_search" />
 
         <LinearLayout

@@ -9,6 +9,7 @@ interface GithubRetrofitApi {
     @GET("search/repositories?q=repos:>1")
     suspend fun getRepositories(
         @Query("q") query: String,
+        @Query("sort") sortBy: String,
         @Query("page") page: Int,
         @Query("per_page") pageSize: Int
     ): GithubRepositoryResponseModel

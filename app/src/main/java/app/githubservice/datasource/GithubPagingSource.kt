@@ -11,14 +11,15 @@ private const val STARTING_PAGE_INDEX = 1
 
 class GithubPagingSource(
     private val githubApi: GithubRetrofitApi,
-    private val query: String
+    private val query: String,
+    private val sortBy: String,
 ) : PagingSource<Int, GithubRepositoryModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GithubRepositoryModel> {
         val position = params.key ?: STARTING_PAGE_INDEX
 
         return try {
-            val response = githubApi.getRepositories(query, position, params.loadSize)
+            val response = githubApi.getRepositories(query, sortBy, position, params.loadSize)
 
             LoadResult.Page(
                 data = response.items,

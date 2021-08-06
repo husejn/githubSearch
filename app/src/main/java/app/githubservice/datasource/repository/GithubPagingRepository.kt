@@ -6,11 +6,11 @@ import app.githubservice.datasource.remote.GithubRetrofitApi
 
 
 class GithubPagingRepository constructor(private val githubApi: GithubRetrofitApi) {
-    fun getSearchResults(query: String) =
+    fun getSearchResults(query: String, sortBy: String) =
         Pager(
             config = PagingConfig(
                 pageSize = 25,
             ),
-            pagingSourceFactory = { GithubPagingSource(githubApi, query) }
+            pagingSourceFactory = { GithubPagingSource(githubApi, query, sortBy) }
         ).liveData
 }

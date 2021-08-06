@@ -4,4 +4,8 @@
     <string name="try_again">Try Again</string>
     <string name="no_results_found">No results found</string>
     <string name="avatar">avatar image</string>
+    <string name="bestmatch">bestmatch</string>
+    <string name="stars">stars</string>
+    <string name="forks">forks</string>
+    <string name="updated">updated</string>
 </resources>
