@@ -18,6 +18,7 @@ class SearchViewModel(
 ) : ViewModel() {
 
     private val _currentQuery = MutableLiveData<String>()
+    val currentQuery: LiveData<String> = _currentQuery
     private val _currentSort = MutableLiveData(GithubSearch.BEST_MATCH)
     val currentSort: LiveData<String> = _currentSort
 
@@ -30,6 +31,10 @@ class SearchViewModel(
         }
     }
 
+    init {
+        searchGithub(INITIAL_SEARCH_TERM)
+    }
+
     val githubSearchResults = Transformations.switchMap(combinedValues) { pair ->
         val query = pair.first
         val sortBy = pair.second
@@ -39,7 +44,9 @@ class SearchViewModel(
     }
 
     fun searchGithub(query: String) {
-        _currentQuery.value = query
+        if (query.isNotBlank()) {
+            _currentQuery.value = query
+        }
     }
 
     fun sortBy(sortBy: String) {

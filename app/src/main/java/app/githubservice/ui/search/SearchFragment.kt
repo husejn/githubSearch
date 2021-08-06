@@ -9,14 +9,16 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import app.githubservice.databinding.SearchFragmentBinding
 import app.githubservice.model.GithubRepositoryModel
+import app.githubservice.ui.util.navigateSafe
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import androidx.recyclerview.widget.DividerItemDecoration
 
 
 const val DEFAULT_DEBOUNCE_DELAY = 1000L
@@ -88,13 +90,17 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                searchDebounced(newText)
+                // fire only if user is typing, not system
+                if (!binding.searchView.isIconified) {
+                    searchDebounced(newText)
+                }
                 return false
             }
         })
 
-        binding.searchView.setQuery(INITIAL_SEARCH_TERM, true)
-
+        viewModel.currentQuery.value?.let {
+            binding.searchView.setQuery(it, false)
+        }
     }
 
     private var searchJob: Job? = null
@@ -113,6 +119,12 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(githubRepo: GithubRepositoryModel) {
+        findNavController().navigateSafe(
+            this,
+            SearchFragmentDirections.actionSearchFragmentDetailsFragmnet()
+        )
+
+
         Toast.makeText(requireContext(), githubRepo.fullName, Toast.LENGTH_SHORT).show()
     }
 
