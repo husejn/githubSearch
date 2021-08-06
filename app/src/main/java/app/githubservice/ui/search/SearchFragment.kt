@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import app.githubservice.databinding.SearchFragmentBinding
 import app.githubservice.model.GithubRepositoryModel
 import app.githubservice.ui.util.navigateSafe
+import app.githubservice.ui.util.openUrlLink
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -126,6 +127,10 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
 
 
         Toast.makeText(requireContext(), githubRepo.fullName, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onImageClick(githubRepo: GithubRepositoryModel) {
+       openUrlLink(requireContext(), githubRepo.owner.htmlUrl)
     }
 
 }

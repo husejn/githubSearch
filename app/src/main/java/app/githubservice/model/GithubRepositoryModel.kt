@@ -31,6 +31,8 @@ data class GithubRepositoryModel(
 @Keep
 data class GithubOwner(
     val login: String,
+    @SerializedName("html_url")
+    val htmlUrl: String,
     @SerializedName("avatar_url")
     val avatarUrl: String,
 )

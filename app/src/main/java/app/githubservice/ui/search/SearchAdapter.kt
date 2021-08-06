@@ -43,6 +43,16 @@ class SearchAdapter(private val listener: OnItemClickListener) :
                     }
                 }
             }
+
+            binding.imageView.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onImageClick(item)
+                    }
+                }
+            }
         }
 
         @SuppressLint("SetTextI18n")
@@ -65,6 +75,7 @@ class SearchAdapter(private val listener: OnItemClickListener) :
 
     interface OnItemClickListener {
         fun onItemClick(githubRepo: GithubRepositoryModel)
+        fun onImageClick(githubRepo: GithubRepositoryModel)
     }
 
     companion object {
