@@ -16,6 +16,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.recyclerview.widget.DividerItemDecoration
+
 
 const val DEFAULT_DEBOUNCE_DELAY = 1000L
 
@@ -45,6 +47,14 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
             header = GithubLoadStateAdapter { adapter.retry() },
             footer = GithubLoadStateAdapter { adapter.retry() }
         )
+
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                binding.recyclerView.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
         binding.buttonTryAgain.setOnClickListener { adapter.retry() }
 
         adapter.addLoadStateListener { loadState ->
