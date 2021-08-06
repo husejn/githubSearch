@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import app.githubservice.R
 import app.githubservice.databinding.ItemGithubSearchBinding
 import app.githubservice.model.GithubRepositoryModel
 import com.bumptech.glide.Glide
@@ -47,6 +48,7 @@ class SearchAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 Glide.with(itemView)
                     .load(githubRepoModel.owner.avatarUrl)
+                    .error(R.drawable.ic_error)
                     .into(imageView)
 
                 textViewUserName.text = githubRepoModel.fullName
