@@ -17,6 +17,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+const val DEFAULT_DEBOUNCE_DELAY = 1000L
+
 class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
     private val viewModel: SearchViewModel by viewModel()
     private var _binding: SearchFragmentBinding? = null
@@ -90,7 +92,7 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
     fun searchDebounced(searchText: String) {
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
-            delay(2500)
+            delay(DEFAULT_DEBOUNCE_DELAY)
             viewModel.searchGithub(searchText)
         }
     }
