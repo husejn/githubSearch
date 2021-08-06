@@ -122,11 +122,12 @@ class SearchFragment : Fragment(), SearchAdapter.OnItemClickListener {
     override fun onItemClick(githubRepo: GithubRepositoryModel) {
         findNavController().navigateSafe(
             this,
-            SearchFragmentDirections.actionSearchFragmentDetailsFragmnet()
+            SearchFragmentDirections.actionSearchFragmentDetailsFragment(
+                githubRepo
+            )
         )
 
 
-        Toast.makeText(requireContext(), githubRepo.fullName, Toast.LENGTH_SHORT).show()
     }
 
     override fun onImageClick(githubRepo: GithubRepositoryModel) {
